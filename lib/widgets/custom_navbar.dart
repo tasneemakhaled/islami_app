@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:islami_app/views/home_view.dart';
+import 'package:islami_app/views/prayer_times.dart';
+import 'package:islami_app/views/zekr.dart';
 
 class CustomNavbar extends StatefulWidget {
   const CustomNavbar({super.key});
@@ -10,6 +13,7 @@ class CustomNavbar extends StatefulWidget {
 
 class _CustomNavbarState extends State<CustomNavbar> {
   int selectedIndex = 0;
+  List views = [HomeView(), Zekr(), PrayerTimes()];
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
