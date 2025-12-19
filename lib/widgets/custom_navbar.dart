@@ -13,7 +13,7 @@ class CustomNavbar extends StatefulWidget {
 
 class _CustomNavbarState extends State<CustomNavbar> {
   int selectedIndex = 0;
-  List views = [HomeView(), Zekr(), PrayerTimes()];
+  List views = [HomeView(), ZekrView(), PrayerTimes()];
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(

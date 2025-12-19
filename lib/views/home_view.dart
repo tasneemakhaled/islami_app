@@ -13,7 +13,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int selectedIndex = 0;
-  List views = [QuranView(), Zekr(), PrayerTimes()];
+  List views = [QuranView(), ZekrView(), PrayerTimes()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
