@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:islami_app/Notifications/local_notifications.dart';
 import 'package:islami_app/views/home_view.dart';
 import 'package:islami_app/views/prayer_times.dart';
 import 'package:islami_app/views/zekr.dart';
@@ -24,6 +25,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
       onTap: (index) {
         setState(() {
           selectedIndex = index;
+        
         });
       },
       items: [

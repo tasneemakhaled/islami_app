@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/views/zekr_details.dart';
 
 class CustomZekr extends StatelessWidget {
   const CustomZekr({super.key, required this.text});

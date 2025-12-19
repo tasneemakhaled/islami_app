@@ -20,7 +20,7 @@ class PrayerTimes extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           // الخطوة الأهم: تغليف المحتوى بـ FutureBuilder
           child: FutureBuilder(
             future: getPrayerData(), // الدالة اللي بتجيب الداتا
@@ -60,7 +60,7 @@ class PrayerTimes extends StatelessWidget {
                     Image.asset('assets/images/Logo.png'),
                     Container(
                       height: 170,
-                      width: 350,
+                      width: 370,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
                         color: Color(0xffE2BE7F),
@@ -103,11 +103,12 @@ class PrayerTimes extends StatelessWidget {
                               },
                             ),
                           ),
+                          SizedBox(height: 10),
                           // ممكن تحسبي الصلاة القادمة لوجيك، بس حالياً هنسيبها ثابتة أو نعرض الوقت الحالي
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text('Timezone: ${data.timezone}'),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: 8.0),
+                          //   child: Text('Timezone: ${data.timezone}'),
+                          // ),
                         ],
                       ),
                     ),
