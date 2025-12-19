@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/services/prayer_timing_service.dart';
+import 'package:islami_app/views/evening_azkar.dart';
+import 'package:islami_app/views/morning_azkar.dart';
 import 'package:islami_app/widgets/prayer_item.dart';
 
 class PrayerTimes extends StatelessWidget {
@@ -14,7 +16,7 @@ class PrayerTimes extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/Background.png'),
+            image: AssetImage('assets/images/Background.png'),
           ),
         ),
         child: Padding(
@@ -55,7 +57,7 @@ class PrayerTimes extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Image.asset('assets/Logo.png'),
+                    Image.asset('assets/images/Logo.png'),
                     Container(
                       height: 170,
                       width: 350,
@@ -124,42 +126,64 @@ class PrayerTimes extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xffE2BE7F)),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'assets/morning.png',
-                                width: 150,
-                                height: 150,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return MorningAzkar();
+                                },
                               ),
-                              Text(
-                                'Morning Azkar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xffE2BE7F)),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/morning.png',
+                                  width: 150,
+                                  height: 150,
+                                ),
+                                Text(
+                                  'Morning Azkar',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xffE2BE7F)),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'assets/evening.png',
-                                width: 150,
-                                height: 150,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return EveningAzkar();
+                                },
                               ),
-                              Text(
-                                'Evening Azkar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xffE2BE7F)),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/evening.png',
+                                  width: 150,
+                                  height: 150,
+                                ),
+                                Text(
+                                  'Evening Azkar',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

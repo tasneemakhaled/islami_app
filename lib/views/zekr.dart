@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/views/zekr_details.dart';
 import 'package:islami_app/widgets/custom_zekr.dart';
 
 class ZekrView extends StatelessWidget {
-  ZekrView({super.key});
-  List<String> zekr = [
+  const ZekrView({super.key});
+  static const List<String> zekr = [
     'سبحان الله',
     'الحمد لله',
     'لا اله الا الله',
@@ -24,7 +25,7 @@ class ZekrView extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/Background (1).png'),
+              image: AssetImage('assets/images/Background (1).png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -42,12 +43,23 @@ class ZekrView extends StatelessWidget {
             // shrinkWrap: true,
             // physics: NeverScrollableScrollPhysics(),
             itemCount: zekr.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomZekr(text: zekr[index]),
-              );
-            },
+           // داخل ListView.builder في صفحة ZekrView
+itemBuilder: (context, index) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ZekrDetails(zekrText: zekr[index]),
+          ),
+        );
+      },
+      child: CustomZekr(text: zekr[index]),
+    ),
+  );
+},
           ),
         ),
       ),

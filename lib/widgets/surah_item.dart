@@ -15,8 +15,11 @@ class SurahItem extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset('assets/Vector.png'), // تأكد من المسار
-            Text('${surah.number}', style: const TextStyle(color: Colors.white)),
+            Image.asset('assets/images/Vector.png'), // تأكد من المسار
+            Text(
+              '${surah.number}',
+              style: const TextStyle(color: Colors.white),
+            ),
           ],
         ),
         Column(
@@ -32,10 +35,7 @@ class SurahItem extends StatelessWidget {
             ),
             Text(
               '${surah.numberOfAyahs} verses',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
+              style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ],
         ),

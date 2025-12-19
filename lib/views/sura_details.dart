@@ -77,13 +77,13 @@ class _SuraDetailsState extends State<SuraDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset('assets/left.png'),
+                      Image.asset('assets/images/left.png'),
                       // يمكن إضافة "بسم الله" هنا كصورة أو نص إذا لم تكن جزءاً من الآيات
                       // const Text(
                       //    "بسم الله الرحمن الرحيم",
                       //    style: TextStyle(color: Color(0xffE2BE7F), fontSize: 20, fontWeight: FontWeight.bold),
                       // ),
-                      Image.asset('assets/right.png'),
+                      Image.asset('assets/images/right.png'),
                     ],
                   ),
                   const SizedBox(height: 20),

@@ -6,49 +6,40 @@ class CustomZekr extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return ZekrDetails();
-            },
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: Color(0xffE2BE7F),
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        // physics: NeverScrollableScrollPhysics(),
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 15),
+              Text(
+                text,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  'عدد الحبات 33  ',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Text(
+              //     'عدد المرات الاجمالي 1  ',
+              //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+            ],
           ),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Color(0xffE2BE7F),
-        ),
-        child: ListView(
-          shrinkWrap: true,
-          // physics: NeverScrollableScrollPhysics(),
-          children: [
-            Column(
-              children: [
-                Text(
-                  text,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    'عدد الحبات 33  ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    'عدد المرات الاجمالي 1  ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }

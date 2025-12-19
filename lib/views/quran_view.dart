@@ -13,10 +13,10 @@ class QuranView extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/Background.png'),
+            image: AssetImage('assets/images/Background.png'),
           ),
         ),
-        child: Column(children: [Image.asset('assets/Logo.png'), Expanded(child: SurasList())]),
+        child: Column(children: [Image.asset('assets/images/Logo.png'), Expanded(child: SurasList())]),
       ),
     );
   }
