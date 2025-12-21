@@ -1,3 +1,4 @@
+import 'package:adhan/adhan.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -133,7 +134,7 @@ class LocalNotifications {
       10,
       'أذكار الصباح☀️',
       'حان الآن موعد أذكار الصباح، نور بها يومك',
-      _nextInstanceOfTime(7, 0),
+      _nextInstanceOfTime(5, 0),
       notificationDetails,
       payload: 'morning', // مهم جداً للتنقل
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -146,13 +147,54 @@ class LocalNotifications {
       11,
       'أذكار المساء🌙',
       'حان الآن موعد أذكار المساء، استعن بها على ليلك',
-      _nextInstanceOfTime(17, 0),
+      _nextInstanceOfTime(15, 0),
       notificationDetails,
       payload: 'evening', // مهم جداً للتنقل
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      // uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+
       matchDateTimeComponents: DateTimeComponents.time,
     );
+  }
+
+  // --- دالة جدولة الأذان (بتوقيت القاهرة) ---
+  static Future<void> schedulePrayerNotifications() async {
+    // إحداثيات القاهرة
+    final coordinates = Coordinates(30.0444, 31.2357);
+    // طريقة الحساب المصرية
+    final params = CalculationMethod.egyptian.getParameters();
+    params.madhab = Madhab.shafi;
+
+    final prayerTimes = PrayerTimes.today(coordinates, params);
+
+    Map<String, DateTime> prayers = {
+      'الفجر': prayerTimes.fajr,
+      'الظهر': prayerTimes.dhuhr,
+      'العصر': prayerTimes.asr,
+      'المغرب': prayerTimes.maghrib,
+      'العشاء': prayerTimes.isha,
+    };
+
+    const androidDetails = AndroidNotificationDetails(
+      'prayer_channel',
+      'إشعارات الأذان',
+      importance: Importance.max,
+      priority: Priority.high,
+      // sound: RawResourceAndroidNotificationSound('azan'), // تأكدي من وجود ملف azan في res/raw
+      audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
+    );
+
+    for (var entry in prayers.entries) {
+      if (entry.value.isAfter(DateTime.now())) {
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+          entry.key.hashCode,
+          'حان الآن موعد الأذان',
+          'حي على الصلاة.. موعد أذان ${entry.key}',
+          tz.TZDateTime.from(entry.value, tz.local),
+          const NotificationDetails(android: androidDetails),
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        );
+      }
+    }
   }
 
   static Future<void> testNavigationNow() async {

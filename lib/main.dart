@@ -6,7 +6,6 @@ import 'package:workmanager/workmanager.dart';
 import 'package:islami_app/Notifications/local_notifications.dart';
 import 'package:islami_app/app.dart';
 
-// 1. تعريف المفتاح العالمي للملاحة للوصول للصفحات من أي مكان
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @pragma('vm:entry-point')
@@ -42,42 +41,45 @@ void callbackDispatcher() {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // تهيئة الإشعارات
   await LocalNotifications.init();
 
-   var flutterNotifications = LocalNotifications.flutterLocalNotificationsPlugin;
+  var flutterNotifications = LocalNotifications.flutterLocalNotificationsPlugin;
   if (Platform.isAndroid) {
     final androidPlugin = LocalNotifications.flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
-    
-    // 1. طلب إذن الإشعارات العام
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+
     await androidPlugin?.requestNotificationsPermission();
-    // 2. طلب إذن المنبهات الدقيقة (مهم جداً للجدولة)
+
     await androidPlugin?.requestExactAlarmsPermission();
-  await flutterNotifications
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestNotificationsPermission();
- // طلب إذن المنبه الدقيق (ضروري جداً لـ zonedSchedule)
-  await flutterNotifications
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestExactAlarmsPermission();
-  // طلب إذن المنبه الدقيق (ضروري جداً لـ zonedSchedule)
-  await flutterNotifications
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestExactAlarmsPermission();
-  // تهيئة الورك مانجر
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
+    await flutterNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestNotificationsPermission();
 
-  // تسجيل المهام
-  LocalNotifications.startHourlyAzkar();
+    await flutterNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestExactAlarmsPermission();
 
-  // جدولة أذكار الصباح والمساء
-  await LocalNotifications.scheduleDailyAzkar();
-  LocalNotifications.testImmediately();
+    await flutterNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestExactAlarmsPermission();
 
-  // ب- اختبار الملاحة (سيظهر إشعار بعد 10 ثوانٍ لتجربة الضغط عليه)
-  await LocalNotifications.testNavigationNow();
+    await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
 
-  runApp(IslamiApp());
-}
+    LocalNotifications.startHourlyAzkar();
+
+    await LocalNotifications.scheduleDailyAzkar();
+    LocalNotifications.testImmediately();
+
+    await LocalNotifications.testNavigationNow();
+    await LocalNotifications.schedulePrayerNotifications();
+    runApp(IslamiApp());
+  }
 }
